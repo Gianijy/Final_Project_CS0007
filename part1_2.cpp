@@ -1,12 +1,13 @@
 #include "part1_2.h"
 
+
+
 void PartOne_Two::swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
-
-void PartOne_Two::selectionSort(int array[], int size) { // Selection sort, a greedy algorithm-type approach to sorting.
+void PartOne_Two::selectionSort(int array[], int size) { // Selectioon sort, a greedy algorithm-type approach to sorting.
 for (int step = 0; step < size - 1; step++) {
     int min_idx = step;
     for (int i = step + 1; i < size; i++) {
@@ -16,6 +17,7 @@ for (int step = 0; step < size - 1; step++) {
     swap(&array[min_idx], &array[step]);
     }
 }
+
 
 void PartOne_Two::readData(std::string source){ // Function to read data from the csv file.
     std::ifstream api_marketData;
@@ -54,15 +56,37 @@ void PartOne_Two::readData(std::string source){ // Function to read data from th
     */
 }
 
-void PartOne_Two::dynamicPricing(int room_type){     
+
+
+/* void PartOne_Two::dynamicPricing(int room_type, int month){     
     //Utilizes greedy algorithm to search for the best pricing available for each room type.
     //Room type [0-4] corresponds to each room category as stated in the [Market Data] struct.
+    int temp_sortedPrice[5];
     for (int x = 0; x < 12; x++){
-        int temp_sortedPrice[5];
+        //int temp_sortedPrice[5];
         for (auto y = 0; y < 5; y++){
-            temp_sortedPrice[y] = data[x].priceData[y][room_type]; 
+            temp_sortedPrice[y] = data[month-1].priceData[y][room_type]; 
         }
         selectionSort(temp_sortedPrice, 5);
-        std::cout << months[x] << ": " << temp_sortedPrice[4] << std::endl;
+        //std::cout << months[x] << ": " << temp_sortedPrice[4] << std::endl;
+
     }
+    std::cout<<months[month]<<": "<<temp_sortedPrice[4]<<std::endl;
+}*/
+
+int PartOne_Two::dynamicPricing(int room_type, int month){     
+    //Utilizes greedy algorithm to search for the best pricing available for each room type.
+    //Room type [0-4] corresponds to each room category as stated in the [Market Data] struct.
+    int temp_sortedPrice[5];
+    for (int x = 0; x < 12; x++){
+        //int temp_sortedPrice[5];
+        for (auto y = 0; y < 5; y++){
+            temp_sortedPrice[y] = data[month-1].priceData[y][room_type]; 
+        }
+        selectionSort(temp_sortedPrice, 5);
+        //std::cout << months[x] << ": " << temp_sortedPrice[4] << std::endl;
+
+    }
+    int basePrice = temp_sortedPrice[4];
+    return basePrice;
 }

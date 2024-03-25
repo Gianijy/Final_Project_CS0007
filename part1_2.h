@@ -23,7 +23,7 @@ class PartOne_Two{
     void swap(int *a, int *b);
     void selectionSort(int array[], int size);
     void readData(std::string source); // Function to read data from the csv file.
-    void dynamicPricing(int room_type); //Utilizes greedy algorithm to search for the best pricing available for each room type.
+    int dynamicPricing(int room_type, int month); //Utilizes greedy algorithm to search for the best pricing available for each room type.
 };
 
 #endif
