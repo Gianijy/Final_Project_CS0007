@@ -5,16 +5,18 @@
 #include <algorithm>
 #include <fstream>
 
+// struct to represent customer data
 struct Customer {
     std::string name;
     int bookingHistory;
     int preferredRoom;
     int bookingDate;
 };
-
+// vectors to store customer data and priority list
 std::vector<Customer> customers;
 std::vector<Customer> priorityList;
 
+// insertion sort for decrease and conquer
 void insertionSort(std::vector<Customer>& customers) {
     int n = customers.size();
     for (int i = 1; i < n; ++i) {
@@ -28,10 +30,7 @@ void insertionSort(std::vector<Customer>& customers) {
     }
 }
 
-bool sortByPreferredRoom(const Customer& a, const Customer& b) {
-    return a.preferredRoom < b.preferredRoom; 
-}
-
+// reads customer data from a text file
 void readCustomerData(std::vector<Customer>& customers) {
     customers.clear();
     std::ifstream inFile("customer_data.txt");
@@ -56,6 +55,7 @@ void readCustomerData(std::vector<Customer>& customers) {
     inFile.close();
 }
 
+// displays booking logs from text file
 void displayBookingLogs() {
     readCustomerData(customers);
 
@@ -76,7 +76,7 @@ void displayBookingLogs() {
             std::cout << "Invalid preferred room for customer: " << customer.name << ". Skipping...\n";
             continue;
         }
-
+        //vectors added to change value from integer to actual names
         std::vector<std::string> monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         std::vector<std::string> roomNames = {"Standard Queen", "Standard King", "Standard King - Connecting", "Deluxe", "Suite"};
 
@@ -87,6 +87,8 @@ void displayBookingLogs() {
     }
 }
 
+// displays priority list, insertion sort used and then data is displayed 
+// in descending order to show highest booking history
 void displayPriorityList() {
     readCustomerData(customers);
     priorityList = customers;
@@ -105,6 +107,7 @@ void displayPriorityList() {
     }
 }
 
+// gets discounted price based on booking history
 double calculateDiscountedPrice(const Customer& customer, int basePrice) {
     double discountedPrice = basePrice;
 
@@ -120,7 +123,7 @@ double calculateDiscountedPrice(const Customer& customer, int basePrice) {
     return discountedPrice;
 }
 
-
+// gets customer information and calculate price based function from part 1-2
 void CustomerInfo() {
     PartOne_Two function;
     // Read market data from files
@@ -141,6 +144,7 @@ void CustomerInfo() {
     std::string name_input;
     std::cout << "Client name: ";
     std::cin >> name_input;
+    customer.name = name_input;
     std::cout << "Booking history: ";
     std::cin >> customer.bookingHistory;
     do {
@@ -187,6 +191,7 @@ void CustomerInfo() {
 
 }  
 
+//displays menu
 void displayMenu() {
     std::cout << "===== MENU =====\n";
     std::cout << "1. Add Booking\n";
